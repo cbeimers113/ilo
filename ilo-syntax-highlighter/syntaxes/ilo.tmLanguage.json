@@ -1,0 +1,85 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Ilo",
+    "patterns": [
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "#strings"
+        }
+    ],
+    "repository": {
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "comment.line.double-slash.ilo",
+                    "match": "//.*$"
+                },
+                {
+                    "name": "comment.block.ilo",
+                    "begin": "/\\*",
+                    "end": "\\*/",
+                    "patterns": [
+                        {
+                            "name": "comment.block.documentation.ilo",
+                            "match": "\\*\\s*@\\w+"
+                        }
+                    ]
+                },
+                {
+                    "name": "keyword.control.ilo",
+                    "match": "\\b(se|alie|dum|por|redonu|aux|kaj|ne|estas|pli|malpli|ol)\\b"
+                },
+                {
+                    "name": "keyword.declaration.ilo",
+                    "match": "\\b(jen|uzante|de|kiel)\\b"
+                },
+                {
+                    "name": "keyword.operator.ilo",
+                    "match": "(\\+|\\-|\\*|\\/|\\^|%|=)"
+                },
+                {
+                    "name": "keyword.other.ilo",
+                    "match": "(#([0-9]+|[a-zA-Z]+[0-9a-zA-Z]*)\\b|!|\\?|#)"
+                },
+                {
+                    "name": "storage.type.ilo",
+                    "match": "\\b(ago|agoj|tuto|tutoj|punkto|punktoj|vero|veroj|teksto|tekstoj)\\b"
+                },
+                {
+                    "name": "constant.language.ilo",
+                    "match": "\\b(vera|veras|malvera|malveras)\\b"
+                },
+                {
+                    "name": "entity.name.function.ilo",
+                    "match": "\\b(\\w*i|\\w*u)\\b"
+                },
+                {
+                    "name": "entity.name.variable.ilo",
+                    "match": "\\b(\\w*o|\\w*oj|\\w*on|\\w*ojn)\\b"
+                },
+                {
+                    "name": "punctuation.separator.ilo",
+                    "match": "(,|:)"
+                }
+            ]
+        },
+        "strings": {
+            "name": "string.quoted.double.ilo",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.ilo",
+                    "match": "\\\\."
+                },
+                {
+                    "name": "variable.parameter.ilo",
+                    "match": "\\$\\w+"
+                }
+            ]
+        }
+    },
+    "scopeName": "source.ilo"
+}

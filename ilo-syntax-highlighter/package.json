@@ -1,0 +1,44 @@
+{
+    "name": "ilo-syntax-highlighter",
+    "author": {
+        "name": "Chris Beimers",
+        "email": "chrisbeimers113@gmail.com",
+        "url": "https://github.com/cbeimers113"
+    },
+    "publisher": "cbeimers113",
+    "displayName": "Ilo Syntax Highlighter",
+    "description": "Syntax highlighting for the Ilo programming language",
+    "version": "0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cbeimers113/ilo.git"
+    },
+    "engines": {
+        "vscode": "^1.92.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "ilo",
+                "aliases": [
+                    "Ilo",
+                    "ilo"
+                ],
+                "extensions": [
+                    ".ilo"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "ilo",
+                "scopeName": "source.ilo",
+                "path": "./syntaxes/ilo.tmLanguage.json"
+            }
+        ]
+    }
+}
