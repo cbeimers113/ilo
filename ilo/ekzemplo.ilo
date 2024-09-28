@@ -62,7 +62,7 @@ jen ago Komenci:
     tuto lUno = nombroj#1  ~ Lists are 1-indexed and accessed using the # operator
     tuto lDuo = nombroj#2
 
-	~ Line continuation: use the backslash character to continue writing the statement on the next line (indentation must match)
+	~ Line continuation: use the backslash character to continue writing the statement on the next line
     tuto lTrio \
 	= \
 	nombroj#3
@@ -95,7 +95,7 @@ kvin"
 	~ boolean checks:
 	~ == true - veras
 	~ == false - malveras (ne veras would also be acceptable but not conventional. This would be the same as "if b != true...")
-	~ do not write "estas (male)vera"
+	~ do not write "estas (mal)vera"
 	vero saluto malveras
 	se saluto veras,
 		Diru "Ni devas saluti vin!"
