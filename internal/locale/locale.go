@@ -14,6 +14,7 @@ const (
 	ErrInvalidToken
 
 	// Debug flags
+	DbgPreprocessing
 	DbgTokenizing
 	DbgParsing
 
@@ -36,6 +37,7 @@ var LocalizedStrings = map[string][]string{
 		"unclosed quote on line",
 		"invalid token on line",
 
+		"preprocessing",
 		"tokenizing",
 		"parsing",
 
@@ -50,10 +52,11 @@ var LocalizedStrings = map[string][]string{
 		"fonta dosiero ne ekzistas",
 		"nevalida opcio",
 		"nevalida signo en linio",
-		"nefermita citajxo en linio",
-		"nevalida jxetono en linio",
+		"nefermita citaĵo en linio",
+		"nevalida ĵetono en linio",
 
-		"jxetoniganta",
+		"antaŭprocezanta",
+		"ĵetoniganta",
 		"analizanta",
 
 		"kompilanta",

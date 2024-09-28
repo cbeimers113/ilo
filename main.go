@@ -60,12 +60,17 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
+	// Preprocess the raw source code to convert Esperanto characters to their x-mode counterparts
+	if flags[process.FlagDebug] {
+		log.Debug(cfg.Message(locale.DbgPreprocessing))
+	}
+	sourceCode := process.Preprocess(string(data))
+
 	// Create tokens from the raw source code
 	if flags[process.FlagDebug] {
 		log.Debug(cfg.Message(locale.DbgTokenizing))
 	}
-
-	tokens := process.Tokenize(cfg, string(data))
+	tokens := process.Tokenize(cfg, sourceCode)
 	if flags[process.FlagDebug] {
 		for _, token := range tokens {
 			fmt.Println(token)

@@ -11,6 +11,17 @@ const (
 	ColBlue   = "\033[34m"
 )
 
+// Esperanto orthography mapping
+var Orthography = map[rune]string {
+	'ĉ': "cx",
+	'ĝ': "gx",
+	'ĥ': "hx",
+	'ĵ': "jx",
+	'ŝ': "sx",
+	'ŭ': "ux",
+}
+
+// Ilo keywords
 var Keywords = util.NewSet(
 	"se",
 	"alie",
@@ -42,6 +53,7 @@ var Keywords = util.NewSet(
 	"malveras",
 )
 
+// Mathematical, logical and syntactic operators
 var Operators = util.NewSet(
 	'+',
 	'-',

@@ -28,7 +28,7 @@ var flagMap = map[string]FlagId{
 
 // SetUp creates the intermediate and output directories
 func SetUp() error {
-	interDir := filepath.Join(".", ".ilo_c")
+	interDir := filepath.Join(".", ".ilo_go")
 	return os.MkdirAll(interDir, os.ModePerm)
 }
 
