@@ -2,7 +2,11 @@
 #### Programming language that exploits Esperanto's features
 #### Programlingvo kiu ekspluatas la trajtojn de Esperanto
 
+##### * Development Note | Noto de Evoluo
+Ilo is in early development and is not yet in a usable state.
 <br>
+Ilo estas frue en ĝia evoluo, kaj ankoraŭ ne uzeblas.
+
 
 ### Compiling | Kompilanta
 
