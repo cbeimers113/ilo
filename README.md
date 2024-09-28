@@ -27,6 +27,8 @@
 
 ### Writing | Skribanta
 The reference document below outlines Ilo's syntax and features, and is currently only provided in English.
+<br>
 La referenca dokumento malsupre skizas la sintakson kaj funkciojn de Ilo, kaj nuntempe estas nur provizita en la angla.
+<br>
 <br>
 [Ilo Reference](https://github.com/cbeimers113/ilo/blob/3b714894ac3024c8a6ec9b6cd9252d6b385e1ddf/assets/ilo_reference_v0.0.1.pdf)
