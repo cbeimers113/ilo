@@ -206,7 +206,8 @@ func lookupIdent(ident string) TokenType {
 	return TokenIdent
 }
 
-// Tokenize takes raw source code and tokenizes it, returning the tokens organized into a tree of scopes
+// Tokenize takes raw source code and tokenizes it, returning a slice of the tokens encountered.
+// Token reading will exit the program with a status code of 1 if a token-level syntax error occurs (unclosed quotes, invalid char, etc)
 func Tokenize(cfg *config.Config, data string) []Token {
 	tokenizer := NewTokenizer(cfg, data)
 	tokens := make([]Token, 0)

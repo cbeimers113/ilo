@@ -7,6 +7,7 @@ import (
 	"testing"
 )
 
+// TestExits tests that the given function exits the program when executed in the given test
 func TestExits(t *testing.T, f func(), testName string) {
 	if os.Getenv("TEST_EXITS") == "1" {
 		f()
