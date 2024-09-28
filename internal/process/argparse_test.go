@@ -19,6 +19,7 @@ func Test_ParseArgs(t *testing.T) {
 		wantErr    bool
 		wantSource string
 		wantTarget string
+		wantFlags  FlagOpts
 	}{
 		{
 			name:    "no arguments",
@@ -29,26 +30,39 @@ func Test_ParseArgs(t *testing.T) {
 			args:       []string{"test/test.ilo"},
 			wantSource: "test/test.ilo",
 			wantTarget: "test/test",
+			wantFlags:  make(FlagOpts),
 		},
 		{
 			name:       "source file and single word target",
 			args:       []string{"test/test.ilo", "target"},
 			wantSource: "test/test.ilo",
 			wantTarget: "target",
+			wantFlags:  make(FlagOpts),
 		},
 		{
 			name:       "source file and multi word target",
 			args:       []string{"test/test.ilo", "hello", "world"},
 			wantSource: "test/test.ilo",
 			wantTarget: "helloWorld",
+			wantFlags:  make(FlagOpts),
+		},
+		{
+			name:       "handles flags",
+			args:       []string{"--debug", "test/test.ilo"},
+			wantSource: "test/test.ilo",
+			wantTarget: "test/test",
+			wantFlags: map[FlagId]bool{
+				FlagDebug: true,
+			},
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			source, target, err := ParseArgs(cfg, tt.args)
+			source, target, debug, err := ParseArgs(cfg, tt.args)
 			assert.Equal(t, tt.wantSource, source)
 			assert.Equal(t, tt.wantTarget, target)
+			assert.Equal(t, tt.wantFlags, debug)
 			assert.Equal(t, tt.wantErr, err != nil)
 		})
 	}
@@ -66,7 +80,7 @@ func Test_checkArgs(t *testing.T) {
 		{
 			name: "sad path - no args",
 			args: []string{},
-			want: errors.New("missing argument(s)"),
+			want: errors.New("no arguments supplied, nothing to do"),
 		},
 		{
 			name: "sad path - no ilo source file",
@@ -98,6 +112,46 @@ func Test_checkArgs(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			err := checkArgs(cfg, tt.args)
 			assert.Equal(t, tt.want, err)
+		})
+	}
+}
+
+func Test_parseFlags(t *testing.T) {
+	cfg, err := config.TestConfig()
+	assert.NoError(t, err)
+
+	tests := []struct {
+		name      string
+		flags     []string
+		wantFlags FlagOpts
+		wantErr   bool
+	}{
+		{
+			name:  "handles flags",
+			flags: []string{"-debug"},
+			wantFlags: map[FlagId]bool{
+				FlagDebug: true,
+			},
+		},
+		{
+			name:  "handles flag short forms",
+			flags: []string{"d"},
+			wantFlags: map[FlagId]bool{
+				FlagDebug: true,
+			},
+		},
+		{
+			name:      "errors on unknown flag",
+			flags:     []string{"-what"},
+			wantErr:   true,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := parseFlags(cfg, tt.flags)
+			assert.Equal(t, tt.wantFlags, got)
+			assert.Equal(t, tt.wantErr, err != nil)
 		})
 	}
 }

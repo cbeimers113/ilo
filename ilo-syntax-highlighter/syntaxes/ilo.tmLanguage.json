@@ -7,25 +7,17 @@
         },
         {
             "include": "#strings"
+        },
+        {
+            "include": "#fstrings"
         }
     ],
     "repository": {
         "keywords": {
             "patterns": [
                 {
-                    "name": "comment.line.double-slash.ilo",
-                    "match": "//.*$"
-                },
-                {
-                    "name": "comment.block.ilo",
-                    "begin": "/\\*",
-                    "end": "\\*/",
-                    "patterns": [
-                        {
-                            "name": "comment.block.documentation.ilo",
-                            "match": "\\*\\s*@\\w+"
-                        }
-                    ]
+                    "name": "comment.line.tilde.ilo",
+                    "match": "~.*$"
                 },
                 {
                     "name": "keyword.control.ilo",
@@ -49,7 +41,7 @@
                 },
                 {
                     "name": "constant.language.ilo",
-                    "match": "\\b(vera|veras|malvera|malveras)\\b"
+                    "match": "\\b(veras|malveras)\\b"
                 },
                 {
                     "name": "entity.name.function.ilo",
@@ -61,7 +53,7 @@
                 },
                 {
                     "name": "punctuation.separator.ilo",
-                    "match": "(,|:)"
+                    "match": "(,|:|\\.)"
                 }
             ]
         },
@@ -73,10 +65,21 @@
                 {
                     "name": "constant.character.escape.ilo",
                     "match": "\\\\."
+                }
+            ]
+        },
+        "fstrings": {
+            "name": "string.quoted.double.variable.ilo",
+            "begin": "'",
+            "end": "'",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.ilo",
+                    "match": "\\\\."
                 },
                 {
-                    "name": "variable.parameter.ilo",
-                    "match": "\\$\\w+"
+                    "name": "variable.other",
+                    "match": "\\{\\w+\\}"
                 }
             ]
         }

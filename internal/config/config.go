@@ -6,7 +6,7 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"cbeimers113/ilo/internal/constant"
+	"cbeimers113/ilo/internal/locale"
 )
 
 type Config struct {
@@ -22,7 +22,7 @@ func New(data []byte) (*Config, error) {
 
 // Message returns the localized message for a given key
 func (c *Config) Message(key int) string {
-	messages := constant.LocalizedStrings[c.Locale]
+	messages := locale.LocalizedStrings[c.Locale]
 
 	if key >= len(messages) {
 		return fmt.Sprintf("no message at index %d for locale \"%s\"", key, c.Locale)

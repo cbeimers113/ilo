@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"cbeimers113/ilo/internal/config"
-	"cbeimers113/ilo/internal/constant"
+	"cbeimers113/ilo/internal/locale"
 	"cbeimers113/ilo/internal/log"
 	"cbeimers113/ilo/internal/process"
 )
@@ -36,17 +36,47 @@ func main() {
 	cfg := loadConfig()
 
 	// Prepare environment
-	log.Info(fmt.Sprintf("ilo v%s", version))
+	log.Info(fmt.Sprintf("Ilo v%s", version))
 	process.SetUp()
 
 	// Read command line arguments and begin processing
-	if src, target, err := process.ParseArgs(cfg, os.Args[1:]); err != nil {
+	var (
+		src    string
+		target string
+		flags  process.FlagOpts
+		err    error
+	)
+
+	if src, target, flags, err = process.ParseArgs(cfg, os.Args[1:]); err != nil {
 		log.Fatal(err.Error())
-	} else {
-		log.Info(fmt.Sprintf("%s %s -> %s", cfg.Message(constant.MsgCompiling), src, target))
-		startTime := time.Now()
-		// TODO: transpile
-		deltaTime := time.Since(startTime).Milliseconds()
-		log.Info(fmt.Sprintf("%s %d ms", cfg.Message(constant.MsgFinished), deltaTime))
 	}
+
+	log.Info(fmt.Sprintf("%s %s -> %s", cfg.Message(locale.MsgCompiling), src, target))
+	startTime := time.Now()
+
+	// Read the source file
+	data, err := os.ReadFile(src)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	// Create tokens from the raw source code
+	if flags[process.FlagDebug] {
+		log.Debug(cfg.Message(locale.DbgTokenizing))
+	}
+
+	tokens := process.Tokenize(cfg, string(data))
+	if flags[process.FlagDebug] {
+		for _, token := range tokens {
+			fmt.Println(token)
+		}
+	}
+
+	// Parse the tokens into an abstract syntax tree
+	if flags[process.FlagDebug] {
+		log.Debug(cfg.Message(locale.DbgParsing))
+	}
+
+	deltaTime := time.Since(startTime).Milliseconds()
+	log.Info(fmt.Sprintf("%s %d ms", cfg.Message(locale.MsgFinished), deltaTime))
 }

@@ -4,15 +4,8 @@ import (
 	"fmt"
 	"os"
 	"time"
-)
 
-// ANSI escape codes for colors
-const (
-	colReset  = "\033[0m"
-	colRed    = "\033[31m"
-	colGreen  = "\033[32m"
-	colYellow = "\033[33m"
-	colBlue   = "\033[34m"
+	"cbeimers113/ilo/internal/constant"
 )
 
 type logLevel uint8
@@ -24,21 +17,23 @@ const (
 	logLevelError
 )
 
-func log(level logLevel, msg string) {
-	prefix := colReset
+func log(level logLevel, msg string) string {
+	prefix := constant.ColReset
 	switch level {
 	case logLevelDebug:
-		prefix = colBlue
+		prefix = constant.ColBlue
 	case logLevelInfo:
-		prefix = colGreen
+		prefix = constant.ColGreen
 	case logLevelWarn:
-		prefix = colYellow
+		prefix = constant.ColYellow
 	case logLevelError:
-		prefix = colRed
+		prefix = constant.ColRed
 	}
 
 	timestamp := time.Now().Format(time.Kitchen)
-	fmt.Printf("[%s] %s%s%s\n", timestamp, prefix, msg, colReset)
+	str := fmt.Sprintf("[%s] %s%s%s", timestamp, prefix, msg, constant.ColReset)
+	fmt.Println(str)
+	return str
 }
 
 // Debug prints a message at the debug level

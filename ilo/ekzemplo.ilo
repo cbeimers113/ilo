@@ -1,107 +1,105 @@
-uzante Matematikon  // <- Import statements follow this form: uzante (package name in accusative case)
+uzante Matematikon  ~ <- Import statements follow this form: uzante (package name in accusative case)
 
-/*
-Function definitions follow this form: jen (type) (name in infinitive form) [de args...]
-This function takes 3 floats and returns a float
-*/
+~ Function definitions follow this form: jen (type) (name in infinitive form) [de args...]
+~ This function takes 3 floats and returns a float
 jen punkto Grandeci de punkto xo, punkto yo, punkto zo:
-	// Variable identifiers must be in the nominative case when declared & defined
+	~ Variable identifiers must be in the nominative case when declared & defined
 	punkto xKvado = xo * xo
 	punkto yKvado = yo * yo
 	punkto zKvado = zo * zo
 	punkto lTuto = xKvado + yKvado + zKvado
 
-	/*
-	Calling a function from another package: use the package name in the adverb form before calling the function on the args.
-    When calling a function, the function name must be in the imperative mood and the args must be in the acusative case
-	*/
+	~ Calling a function from another package: use the package name in the adverb form before calling the function on the args.
+    ~ When calling a function, the function name must be in the imperative mood and the args must be in the acusative case
 	punkto grandeco = Matematike KvadRadiku lTuton
 
-	// Return statement (return value identifier in accusative)
-	redonu grandecon
+	~ Return statement (return value identifier in accusative)
+	~ Close blocks with a period
+	redonu grandecon.
 
 
-/*
-Function definition that returns multiple values.
-This function takes a float and returns its square root and whether it's a perfect square
-*/
+~ Function definition that returns multiple values.
+~ This function takes a float and returns its square root and whether it's a perfect square
 jen punkto, vero PerfektRadi de punkto nombro:
 	punkto rado = Matematike KvadRadiku nombron
 
-	// Typecasting: floats and ints can be coerced into eachother using the kiel keyword (floats lose precision when casting to int)
+	~ Typecasting: floats and ints can be coerced into eachother using the kiel keyword (floats lose precision when casting to int)
 	tuto tutaRado = rado kiel tuto
-	vero perfekta = tutaRado estas rado  // Declaring a bool as an adjective is valid
+	vero perfekta = tutaRado estas rado  ~ Declaring a bool as an adjective is valid
 
-	redonu rado, perfekta
+	redonu radon, perfektan.
 
 
-/*
-Variadic functions: variadic args must be listed last and are declared using the ? operator
-This function takes a potential list of strings, joins them together into an error message and panics on it
-*/
-jen ago Paniki de tekstoj? mesagxoj:
-	// Base case: if length of mesagxoj is 0, panic with no error message
-	// To check the size of a list, use the "# de" construct
+~ Variadic functions: variadic args must be listed last and are declared using the ? operator
+~ This function takes a potential list of strings, joins them together into an error message and panics on it
+jen ago Paniki de tekstoj mesagxoj?:
+	~ Base case: if length of mesagxoj is 0, panic with no error message
+	~ To check the size of a list, use the "# de" construct
 	se # de tekstoj estas 0,
-		// Panicking: using the ! operator exits the program and returns an exit code of 1 to the calling environment
+		~ Panicking: using the ! operator exits the program and returns an exit code of 1 to the calling environment
 		!
 	
-	teksto panikMesagxo  // Declaring a string without defining it
+	teksto panikMesagxo  ~ Declaring a string without defining it
 
-	// For-each loop: iterate over each message in mesagxoj
+	~ For-each loop: iterate over each message in mesagxoj
 	por mesagxo de mesagxoj:
 		panikMesagxo += mesagxo
 
-	// Alternatively, an index variable can be declared in a for-each loop:
+	~ Alternatively, an index variable can be declared in a for-each loop:
 	por o, mesagxo de mesagxoj:
-		Diru "Mesagxo $o estas: $mesagxo"  // Formatting strings: insert variables using the $ operator
+		Diru 'Mesagxo {o} estas: {mesagxo}'  ~ Formatting strings: you can insert variables with curly braces if enclosing with single quotes
+		Diru "Sed cxi tiu {mesagxo} ne funkcias"  ~ Trying to use a formatted string inside double quotes will print all characters literally
 
-	// Panicking with an error message: use the ! operator with a string to error out of the program with the given message
+	~ Panicking with an error message: use the ! operator with a string to error out of the program with the given message
 	panikMesagxo!
 
 	
-// The main method is always called "Komenci". The equivalent of "void" is "ago" (an action that doesn't return anything)
+~ The main method is always called "Komenci". The equivalent of "void" is "ago" (an action that doesn't return anything)
 jen ago Komenci:
-	/*
-	Defining a list of integers:
-	When declaring/defining a list, the data type and identifier must be in the nominative plural
-	*/
+	~ Defining a list of integers:
+	~ When declaring/defining a list, the data type and identifier must be in the nominative plural
     tutoj nombroj = 1, 3, 5
-    tuto lUno = nombroj#1  // Lists are 1-indexed and accessed using the # operator
+    tuto lUno = nombroj#1  ~ Lists are 1-indexed and accessed using the # operator
     tuto lDuo = nombroj#2
-    tuto lTrio = nombroj#3
 
-	// Define a float, call the Grandeci function with the three ints declared above and assign the return value
+	~ Line continuation: use the backslash character to continue writing the statement on the next line (indentation must match)
+    tuto lTrio \
+	= \
+	nombroj#3
+
+	~ Define a float, call the Grandeci function with the three ints declared above and assign the return value
     punkto lGrandeco = Grandecu lUnon, lDuon, lTrion
-    Diru lGrandecon  // Print the result to the console
+    Diru lGrandecon  ~ Print the result to the console
 
-	/*
-	If - else - else if block
-	Comparisons:
-	== - estas (if objects are introduced in the future, this would only compare pointer equality. Objects would have to define an equals method)
-	> - estas pli ol
-	< - estas malpli ol
+	~ If - else - else if block
+	~ Comparisons:
+	~ == - estas (if objects are introduced in the future, this would only compare pointer equality. Objects would have to define an equals method)
+	~ > - estas pli ol
+	~ < - estas malpli ol
 
-	Open a flow control block with a comma
-	*/
+	~ Open a flow control block with a comma
 	se lGrandeco estas pli ol 5,
 		Diru "La grandeco grandas"
 	alie se lGrandeco estas 5,
-		Diru "La grandeco estas kvin"
+		~ Both double and single quotes support multiline strings
+		Diru "La
+grandeco
+estas
+kvin"
 	alie,
-		Diru "La grandeco etas"
+		Diru "La grandeco etas".
 
-	/*
-	Booleans:
-	Can be declared as adjectives but must still be in the nominative
-	values: true = vera, false = malvera
-	boolean checks:
-	== true - veras
-	== false - malveras (ne veras would also be acceptable but not conventional. This would be the same as "if b != true...")
-	*/
+	~ Booleans:
+	~ Are declared as conjugated adjectives
+	~ values: true = veras, false = malveras
+	~ boolean checks:
+	~ == true - veras
+	~ == false - malveras (ne veras would also be acceptable but not conventional. This would be the same as "if b != true...")
+	~ do not write "estas (male)vera"
 	vero saluto malveras
 	se saluto veras,
 		Diru "Ni devas saluti vin!"
 	alie,
-		Diru, "Ni ne devas saluti vin."
+		Diru "Ni ne devas saluti vin.".
+	.
 

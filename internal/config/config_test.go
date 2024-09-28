@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"cbeimers113/ilo/internal/constant"
+	"cbeimers113/ilo/internal/locale"
 )
 
 var good_test_cfg = []byte("locale: en")
@@ -32,8 +32,8 @@ func Test_Message(t *testing.T) {
 	}{
 		{
 			name:  "happy path - get indexed message",
-			index: constant.ErrNoArguments,
-			want:  "missing argument(s)",
+			index: locale.ErrNoArguments,
+			want:  "no arguments supplied, nothing to do",
 		},
 		{
 			name:  "sad path - get index out of bounds",
